@@ -1,0 +1,100 @@
+// Network Fault Prediction Database ERD
+// Generated for dbdiagram.io
+
+Table times {
+  id_time int [pk]
+  time timestamp
+  Note: 'Time dimension table for daily aggregation'
+}
+
+Table weekends_and_holidays {
+  date date [pk]
+  type varchar
+  Note: 'Calendar information for weekends and holidays'
+}
+
+Table institutions {
+  id_institution int [pk]
+  id_time int [pk]
+  n_flows bigint
+  n_packets bigint
+  n_bytes bigint
+  sum_n_dest_asn bigint
+  average_n_dest_asn decimal
+  std_n_dest_asn decimal
+  sum_n_dest_ports bigint
+  average_n_dest_ports decimal
+  std_n_dest_ports decimal
+  sum_n_dest_ip bigint
+  average_n_dest_ip decimal
+  std_n_dest_ip decimal
+  tcp_udp_ratio_packets decimal
+  tcp_udp_ratio_bytes decimal
+  dir_ratio_packets decimal
+  dir_ratio_bytes decimal
+  avg_duration decimal
+  avg_ttl decimal
+  Note: 'Aggregated network metrics per institution per day'
+}
+
+Table institution_subnets {
+  id_institution_subnet int [pk]
+  id_institution int
+  id_time int [pk]
+  n_flows bigint
+  n_packets bigint
+  n_bytes bigint
+  sum_n_dest_asn bigint
+  average_n_dest_asn decimal
+  std_n_dest_asn decimal
+  sum_n_dest_ports bigint
+  average_n_dest_ports decimal
+  std_n_dest_ports decimal
+  sum_n_dest_ip bigint
+  average_n_dest_ip decimal
+  std_n_dest_ip decimal
+  tcp_udp_ratio_packets decimal
+  tcp_udp_ratio_bytes decimal
+  dir_ratio_packets decimal
+  dir_ratio_bytes decimal
+  avg_duration decimal
+  avg_ttl decimal
+  Note: 'Aggregated network metrics per institution subnet per day'
+}
+
+Table ip_addresses {
+  id_ip int [pk]
+  id_institution_subnet int
+  id_time int [pk]
+  n_flows bigint
+  n_packets bigint
+  n_bytes bigint
+  sum_n_dest_asn bigint
+  average_n_dest_asn decimal
+  std_n_dest_asn decimal
+  sum_n_dest_ports bigint
+  average_n_dest_ports decimal
+  std_n_dest_ports decimal
+  sum_n_dest_ip bigint
+  average_n_dest_ip decimal
+  std_n_dest_ip decimal
+  tcp_udp_ratio_packets decimal
+  tcp_udp_ratio_bytes decimal
+  dir_ratio_packets decimal
+  dir_ratio_bytes decimal
+  avg_duration decimal
+  avg_ttl decimal
+  Note: 'Aggregated network metrics per IP address per day'
+}
+
+// Relationships
+// Time relationships
+Ref: institutions.id_time > times.id_time
+Ref: institution_subnets.id_time > times.id_time
+Ref: ip_addresses.id_time > times.id_time
+Ref: "times"."time" < "weekends_and_holidays"."date"
+
+// Hierarchical relationships: 1 institution contains many institution_subnets, 1 institution_subnet contains many IP addresses
+Ref: institution_subnets.id_institution > institutions.id_institution
+Ref: ip_addresses.id_institution_subnet > institution_subnets.id_institution_subnet
+
