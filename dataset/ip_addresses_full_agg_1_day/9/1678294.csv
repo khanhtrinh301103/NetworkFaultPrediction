@@ -1,0 +1,5 @@
+id_time,n_flows,n_packets,n_bytes,sum_n_dest_asn,average_n_dest_asn,std_n_dest_asn,sum_n_dest_ports,average_n_dest_ports,std_n_dest_ports,sum_n_dest_ip,average_n_dest_ip,std_n_dest_ip,tcp_udp_ratio_packets,tcp_udp_ratio_bytes,dir_ratio_packets,dir_ratio_bytes,avg_duration,avg_ttl
+129,148,1827,1254576,106,3.03,1.54,85,2.43,1.46,135,3.86,2.12,0.99,1.0,0.61,0.61,40.09,120.76
+130,135,5434,5420712,94,2.85,1.18,77,2.33,1.14,118,3.58,2.03,0.99,0.99,0.54,0.5,25.22,127.64
+134,122,2802,2014087,94,2.94,1.41,73,2.28,0.92,120,3.75,1.59,0.93,0.93,0.54,0.48,27.56,127.63
+169,108,13153,13269040,52,3.71,2.05,34,2.43,1.22,89,6.36,7.37,1.0,1.0,0.43,0.33,58.46,136.74
